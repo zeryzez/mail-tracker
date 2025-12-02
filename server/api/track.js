@@ -32,7 +32,9 @@ export default async function handler(req, res) {
     ].some(botKeyword => userAgent.includes(botKeyword));
 
     if (id && !isBot) {
+        console.log(`Pixel requested for ID: ${id}`);
         if (req.methode === 'GET') {
+            console.log('Methode GET détectée');
             try {
                 const { data: existingRow, error: checkError } = await supabase
                     .from('email_logs')
