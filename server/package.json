@@ -1,0 +1,24 @@
+{
+  "name": "mail-follower",
+  "version": "1.0.0",
+  "description": "",
+  "main": "api/tracker.js",
+  "directories": {
+    "lib": "lib",
+    "api": "api",
+    "public": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeryzez/mail-follower.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeryzez/mail-follower/issues"
+  },
+  "homepage": "https://github.com/zeryzez/mail-follower#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.86.0"
+  }
+}

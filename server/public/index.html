@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🕵️‍♂️ Email Tracker Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <button onclick="fetchStats()" class="refresh-btn">🔄 Refresh</button>
+        <h1>Email Opens Tracking</h1>
+
+        <table id="statsTable">
+            <thead>
+                <tr>
+                    <th>Recipient (ID)</th>
+                    <th>Opened At</th>
+                    <th>Device (User Agent)</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+            </tbody>
+        </table>
+
+        <div id="loading" class="empty-state">Loading data...</div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
