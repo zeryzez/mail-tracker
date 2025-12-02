@@ -33,7 +33,7 @@ export default async function handler(req, res) {
 
     if (id && !isBot) {
         console.log(`Pixel requested for ID: ${id}`);
-        if (req.methode === 'GET') {
+        if (req.method === 'GET') {
             console.log('Methode GET détectée');
             try {
                 const { data: existingRow, error: checkError } = await supabase
@@ -72,7 +72,7 @@ export default async function handler(req, res) {
             }
         }
     }
-
+    console.log(`Serving pixel for ID: ${id}`);
     res.setHeader('Content-Type', 'image/gif');
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
     res.status(200).send(PIXEL);
