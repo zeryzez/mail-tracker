@@ -1,0 +1,26 @@
+{
+  "name": "mail-follower",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node sender.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeryzez/mail-follower.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeryzez/mail-follower/issues"
+  },
+  "homepage": "https://github.com/zeryzez/mail-follower#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.86.0",
+    "dotenv": "^17.2.3",
+    "resend": "^6.5.2",
+    "uuid": "^13.0.0"
+  }
+}
