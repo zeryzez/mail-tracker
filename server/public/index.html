@@ -11,8 +11,7 @@
 <body>
 
     <div class="container">
-        <button onclick="fetchStats()" class="refresh-btn">🔄 Refresh</button>
-        <h1>Email Opens Tracking</h1>
+        <h1>Email Tracking <span id="pageIndicator" style="font-size:0.5em; color:#888;"></span></h1>
 
         <table id="statsTable">
             <thead>
@@ -21,6 +20,7 @@
                     <th>Status</th>
                     <th>Sent At</th>
                     <th>Opened At</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -28,10 +28,21 @@
         </table>
 
         <div id="loading" class="empty-state">Loading data...</div>
+
+        <div class="pagination">
+            <button id="prevBtn" onclick="changePage(-1)" disabled>⬅️ Previous</button>
+            <button id="nextBtn" onclick="changePage(1)">Next ➡️</button>
+        </div>
+
+        <div style="text-align:right; margin-top:10px;">
+            <button onclick="fetchStats()" class="refresh-btn">🔄 Refresh</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
 
 </body>
+
+</html>
 
 </html>
