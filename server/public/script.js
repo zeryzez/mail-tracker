@@ -32,12 +32,16 @@ async function fetchStats() {
             const dateFr = new Date(row.opened_at).toLocaleString('fr-FR');
             const device = row.user_agent.includes('Mobile') ? '📱 Mobile' : '💻 Desktop';
 
+            const emailDisplay = row.recipient_email ? row.recipient_email : '<em>Inconnu (Lien manuel)</em>';
+
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                    <td><span class="badge">${row.user_id}</span></td>
-                    <td>${dateFr}</td>
-                    <td title="${row.user_agent}">${device}</td>
-                `;
+                <td>${row.id}</td> <td>${emailDisplay}</td>
+                <td>
+                    <span style="color:${statusColor}; font-weight:bold;">${statusIcon}</span>
+                </td>
+                <td>${row.opened_at ? new Date(row.opened_at).toLocaleString() : '-'}</td>
+            `;
             tableBody.appendChild(tr);
         });
 

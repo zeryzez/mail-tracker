@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     }
     try {
         const { data, error } = await supabase
-            .from('email_opens')
+            .from('email_logs')
             .select('*')
             .order('opened_at', { ascending: false });
 
