@@ -4,11 +4,6 @@ const nodemailer = require('nodemailer');
 const { createClient } = require('@supabase/supabase-js');
 const { v4: uuidv4 } = require('uuid');
 
-const supabase = createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_KEY
-);
-
 async function sendMail(recipient) {
     let testAccount = await nodemailer.createTestAccount();
     let transporter = nodemailer.createTransport({
@@ -33,9 +28,19 @@ async function sendMail(recipient) {
         `,
     });
 
-    await supabase.from('email_logs').insert([
-        { id: trackingId, recipient_email: recipient, status: 'sent', sent_at: new Date() }
-    ]);
+    try {
+        const registerUrl = new URL('api/register', process.env.PIXEL_URL).toString();
+        const res = await fetch(registerUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: trackingId, email: recipient, status: 'sent' }),
+        });
+        if (!res.ok) {
+            console.error('Register API error:', res.status, await res.text());
+        }
+    } catch (err) {
+        console.error('Failed to call register API:', err);
+    }
 
     console.log("-------------------------------------------------------");
     console.log("👉 MAIL : " + nodemailer.getTestMessageUrl(info));
