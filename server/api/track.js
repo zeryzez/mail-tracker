@@ -9,23 +9,65 @@ export default async function handler(req, res) {
     const urlObj = new URL(req.url, `${protocol}://${host}`);
     const id = urlObj.searchParams.get('id');
 
-    if (id) {
-        try {
-            const { error } = await supabase
-                .from('email_opens')
-                .insert([
-                    {
-                        user_id: id,
-                        ip: req.headers['x-forwarded-for'] || 'unknown',
-                        user_agent: req.headers['user-agent']
-                    }
-                ]);
+    const userAgent = (req.headers['user-agent'] || '').toLowerCase();
 
-            if (error) console.error('Code error:', error);
-            else console.log(`Success: Tracked open for ID ${id}`);
+    const isBot = [
+        'bot',
+        'crawler',
+        'spider',
+        'googlebot',
+        'bingbot',
+        'slurp',
+        'duckduckbot',
+        'baidu',
+        'yandex',
+        'sogou',
+        'exabot',
+        'facebookexternalhit',
+        'facebot',
+        'ia_archiver',
+        'python',
+        'curl',
+        'wget'
+    ].some(botKeyword => userAgent.includes(botKeyword));
 
-        } catch (err) {
-            console.error('Code error:', err);
+    if (id && !isBot) {
+        if (req.methode === 'GET') {
+            try {
+                const { data: existingRow, error: checkError } = await supabase
+                    .from('email_logs')
+                    .select('id')
+                    .eq('id', id)
+                    .maybeSingle();
+
+                if (checkError) throw checkError;
+
+                const infoClient = {
+                    ip: req.headers['x-forwarded-for'] || 'Inconnue',
+                    user_agent: req.headers['user-agent'],
+                    opened_at: new Date(),
+                    status: 'opened'
+                };
+
+                if (existingRow) {
+                    await supabase
+                        .from('email_logs')
+                        .update(infoClient)
+                        .eq('id', id);
+                } else {
+                    await supabase
+                        .from('email_logs')
+                        .insert([
+                            {
+                                id: id,
+                                ...infoClient
+                            }
+                        ]);
+                }
+
+            } catch (err) {
+                console.error('Code error:', err);
+            }
         }
     }
 
