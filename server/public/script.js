@@ -35,7 +35,7 @@ async function fetchStats(page = 1) {
 
         loading.style.display = 'none';
 
-        if (data.length === 0) {
+        if (!data || data.length === 0) {
             loading.textContent = "No Data";
             loading.style.display = 'block';
             return;

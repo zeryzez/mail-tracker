@@ -1,4 +1,4 @@
-import { supabase } from '../lib/db';
+import { supabase } from '../lib/db.js';
 
 const PIXEL = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
 

@@ -1,4 +1,4 @@
-import { supabase } from '../lib/db';
+import { supabase } from '../lib/db.js';
 
 const allowCors = fn => async (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true);

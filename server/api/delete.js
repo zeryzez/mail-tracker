@@ -1,4 +1,4 @@
-import { supabase } from '../lib/db';
+import { supabase } from '../lib/db.js';
 
 export default async function handler(req, res) {
     if (req.method !== 'DELETE') {
