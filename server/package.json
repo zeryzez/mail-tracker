@@ -1,5 +1,6 @@
 {
   "name": "mail-follower",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
   "main": "api/tracker.js",
@@ -19,6 +20,12 @@
   },
   "homepage": "https://github.com/zeryzez/mail-follower#readme",
   "dependencies": {
-    "@supabase/supabase-js": "^2.86.0"
+    "@supabase/supabase-js": "^2.86.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1"
+  },
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js"
   }
 }
